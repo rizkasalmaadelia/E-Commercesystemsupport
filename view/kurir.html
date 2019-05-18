@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kurir Page</title>
+  <link rel="stylesheet" type="text/css" href="stylekurir.css">
+  <link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+  <script type="text/javascript" src="jquery.js"></script>
+</head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+td, th {
+  border: 1px solid #b3b3ff;
+  text-align: left;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #b3b3ff;
+}
+</style>
+</head>
+<body>
+<input type="button" value="back" class="tombol_back" onclick="loadback();" />
+<h1 class="judul">DATA KURIR</h1>
+<table>
+  <tr>
+    <td>Num</td>
+    <td>Name</td>
+    <th>Username</th>
+    <th>Password</th>
+  </tr>
+  <tr>
+    <td class="counterCell"></td>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td class="counterCell"></td>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td class="counterCell"></td>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td class="counterCell"></td>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+   <tr>
+    <td class="counterCell"></td>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+   <tr>
+    <td class="counterCell"></td>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+<table id="grid-basic" class="table table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th data-column-id="id" data-type="numeric">ID</th>
+            <th data-column-id="un">Username</th>
+            <th data-column-id="pw" data-order="desc">Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Shawn Mendes</td>
+            <td>singineveryday</td>
+        </tr>
+        ...
+    </tbody>
+</table>
+<script type="text/javascript">
+  $("#grid-basic").bootgrid();
+  function loadback
+
+  (){
+    window.open("main.html","_self");
+  }
+</script>
+</body>
+</html>

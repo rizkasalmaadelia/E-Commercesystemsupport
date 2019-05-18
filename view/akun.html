@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ADD USER PAGE</title>
+    <meta charset="utf-8"/>
+   <!--  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	 <link rel="stylesheet" type="text/css" href="style">
+     <link rel="stylesheet" type="text/css" href="navcss">
+<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+    <script type="text/javascript" src="jquery"></script>
+    <script type="text/javascript" src="jquery-md5"></script>
+   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-toggle-btn"></a>
+            <ul>
+                <li><a href="navigation">Home</a></li>
+                <li><a href="orderid" id="ADDNEW" title = "Tambah Data Baru">New</a></li>
+                <li><a href="#"id="btnsignup" title = "Tambah akun">Add User</a></li>
+                <li><a href="gudang" id="gudang" title = "Lihat Data Gudang">Data Gudang</a></li>
+                <li><a href="kurir" id="kurir" title = "Lihat Data Kurir">Data Kurir</a></li>
+                <li><a href="#nomor">Contact</a></li>
+            </ul>
+        </nav>
+<div class="kotak_login">
+<p class="tulisan_login">Silahkan Isi Data Berikut</p>
+<form id="loginForm" action="login_submit" method="post" accept-charset="utf-8"> <!-- form untuk inputan -->
+        <fieldset>
+            <div data-role="fieldcontain">
+                <label for="username">Username</label>
+                <input type="text" name="nama" id="nama" value="" class="form_login" placeholder="Username..">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="" class="form_login" placeholder="Email..">
+            </div>
+<span class="mata">
+            <div data-role="fieldcontain">
+                <label for="password">Password</label>
+                <input type="password" name="password" autocomplete="off" id="password" value="" class="form_login" placeholder="Password .."> <!-- unhide password 1 -->
+                <span class="input-group-btn" id="span1">
+                    <button id= "show_password" class="btn btn-secondary" type="button">
+                                <span class="glyphicon glyphicon-eye-open" id="show1"></span>
+        </button>
+        </span>
+            </div></span>
+            <!-- <div data-role="fieldcontain">
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" id="cpassword" value="" class="form_login" placeholder="Confirm Password .."> <span class="input-group-btn" id="span2">
+                    <button id= "show_password2" class="btn btn-secondary" type="button">
+                                <span class="glyphicon glyphicon-eye-open" id="show2"></span>
+        </button>
+        </span>
+            </div> -->
+           <!--  <span id='message'></span> -->
+            <div> <!-- combobox untuk input bagian -->
+            	<label for="bagian">Bagian</label>
+            	<select name="bagian" id="bagian" class="form_login">
+            		<option disabled selected value> </option>
+            		<option value="gudang">Gudang</option>
+            		<option value="kurir">Kurir</option>
+            		<option value="admin">Admin</option>
+            	</select>
+            </div><!-- tombol -->
+            <button type="button" class="tombol_login" id="btnsignup" name="submit" >SIGN UP</button>
+            <input type="reset" class="tombol_reset" value="RESET">
+            <button type="button" class="tombol_login" id="btnback" onclick="back();" >BACK</button>
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+        alert("hehe");
+     //script untuk mencocokan password dan Confirm password
+//         $('#password, #cpassword').on('keyup', function () {
+//   if ($('#password').val() == $('#cpassword').val()) {
+//     $('#message').html('').css('color', 'green');
+//   } else 
+//     $('#message').html('Not Matching').css('color', 'red');
+// });  //function untuk kembali ke halaman index
+    	 function back() {
+    window.open("navigation.html","_self"); }
+        //script untuk menembak api sign up
+        alert("hehe2");
+        // $(document).ready(function(){
+            alert("hehe3");
+  $("#btnsignup").click(function(){
+    alert("hehe4");
+    var md5 = $.md5($('#password').val());
+    var bagian = $('#bagian').children("option:selected").val();
+    alert("hehe");
+    $.ajax({
+        type: "POST",
+        datatype:"json",
+        url: "https://tororo-api.appspot.com/signup",
+        data:({
+            nama : $('#nama').val(),
+            email : $('#email').val(),
+            bagian : $('#bagian').val(),
+            password:md5,
+            token: "15262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+        {
+            if(result != null) // you should do your checking here
+            {
+               var myObj = JSON.parse(result);
+                 if(myObj[0].email != null){
+                    alert("hai");
+                    //agar input form kembali kosong
+                    $('#password').val('');
+                    $('#cpassword').val('');
+                    $('#nama').val('');
+                    $('#email').val('');
+                    $('#bagian').val(' ');
+                }
+                else{
+                    alert("Gagal Membuat akun.");
+                    
+                }
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+            }
+        }
+    });
+    //return false;
+});
+  //});
+
+        //function untuk menjalankan hide dan unhide password
+        $("#show_password").hover(
+  function functionName() {
+    //Change the attribute to text
+    $("#password").attr("type", "text");
+    $("#show1")
+      .removeClass("glyphicon-eye-open")
+      .addClass("glyphicon-eye-close");
+  },
+  function() {
+    //Change the attribute back to password
+    $("#password").attr("type", "password");
+    $("#show1")
+      .removeClass("glyphicon-eye-close")
+      .addClass("glyphicon-eye-open");
+  }
+);
+ $("#show_password2").hover(
+  function functionName2() {
+    //Change the attribute to text
+    $("#cpassword").attr("type", "text");
+    $("#show2")
+      .removeClass("glyphicon-eye-open")
+      .addClass("glyphicon-eye-close");
+  },
+  function() {
+    //Change the attribute back to password
+    $("#cpassword").attr("type", "password");
+    $("#show2")
+      .removeClass("glyphicon-eye-close")
+      .addClass("glyphicon-eye-open");
+  }
+);
+ $("#nama").keyup(function(e){
+    if(e.keyCode == 13) {
+         $("#email").focus();
+    }
+});
+ $("#email").keyup(function(e){
+    if(e.keyCode == 13) {
+         $("#password").focus();
+    }
+});
+$("#password").keyup(function(e){
+    if(e.keyCode == 13) {
+         $("#cpassword").focus();
+    }
+});
+(function() {
+            
+            var bodyEl = $('body'),
+                navToggleBtn = bodyEl.find('.nav-toggle-btn');
+            
+            navToggleBtn.on('click', function(e) {
+                bodyEl.toggleClass('active-nav');
+                e.preventDefault();
+            });           
+        })();
+        // $(function() {
+        //     $("#ADDNEW").tooltip();
+        //     $("#kurir").tooltip();
+        //     $("#gudang").tooltip();
+        //     $("#btnsignup").tooltip();
+        //      });
+
+    </script>
+</body>
+</html>

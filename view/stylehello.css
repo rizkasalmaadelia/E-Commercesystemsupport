@@ -1,0 +1,294 @@
+body{
+	font-family: sans-serif;
+	background: #f2f2f2;
+
+}
+.orderid{
+	box-sizing : border-box;
+	width: 50%;
+	font-size: 9pt;
+	margin-top: 30px;
+	border-radius: 10px;
+	margin-left: 230px;
+	margin-right: 20px;
+	padding: 8px;
+}
+.orderid2{
+	box-sizing : border-box;
+	width: 645px;
+	font-size: 9pt;
+	border-radius: 10px;
+	/*margin-left: 210px;*/
+	padding: 8px;
+}
+.orderid3{
+	box-sizing : border-box;
+	width: 100px;
+	font-size: 9pt;
+	margin-top: 20px;
+	border-radius: 6px;
+	padding: 4px;
+}
+.kurar{
+	box-sizing : border-box;
+	width: 40%;
+	font-size: 11pt;
+	border-radius: 10px;
+	margin-right: 20px;
+	padding: 9px;
+}
+.kurar2{
+	align-content: center;
+	box-sizing : border-box;
+	width: 100%;
+	font-size: 11pt;
+	border-radius: 10px;
+	padding: 9px;
+	margin-left: 28px;
+}
+.kotakhasil{
+	margin-left: 210px;
+	background: white;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+	padding-left: 140px;
+	padding-right: 300px;
+}
+.baris{
+	margin-top: 5px;
+
+}
+.barisal{
+	margin-top: 5px;
+}
+.u{
+	height: 150px;
+	border-radius: 10px;
+	background-color: #f9fbff;
+}
+.u2{
+	height: 60px;
+	border-radius: 10px;
+	
+}
+.loc{
+	height: 25px;
+	border-radius: 10px;
+
+}
+#geomap{
+    width: 70%;
+    height: 400px;
+    align-content: center;
+    margin:0 auto;
+}
+#map{
+    width: 70%;
+    height: 400px;
+    margin: auto;
+}
+.hasil{
+	font-size: 12pt;
+}
+.input-group-btn{
+	position: relative;
+}
+.tombolsearch{
+	background: #036;
+	color: white;
+	font-size: 15pt;
+	width: 100px;
+	border: none;
+	border-radius: 10px;
+	margin-top: 30px;
+	margin-left: 10px;
+
+}
+.tombolsearch2{
+	background: #036;
+	color: white;
+	font-size: 15pt;
+	width: 100px;
+	border: none;
+	border-radius: 10px;
+	position: absolute;
+	left: 30px;
+	bottom: 6px;
+}
+.labelkurir{
+	margin-left: 30px;
+	font-size: 12px;
+}
+.tombolsave{
+	background: #036;
+	color: white;
+	font-size: 25pt;
+	width: 200px;
+	border: none;
+	border-radius: 10px;
+	text-align:right;
+}
+.container{
+	padding-right: 200px;
+}
+@media print {
+  #printPageButton {
+    display: none;
+  }
+  #btnsave {
+    display: none;
+  }
+  #order_id{display: none;}
+  #btnsearch{display: none;}
+  #geomap{display: none;}
+  .orderid2{display: none;}
+  .tombolsearch2{display: none;}
+  /*#dropdown{display: none;}*/
+  #labeldropdown{display: none;}
+  #loc{display: none;}
+  #labelSL{display: none;}
+  #dropdown{display: none;}
+  #search_latitude{display: none;}
+  #search_longitude{display: none;}
+  #search_addr{display: none;}
+  .kotakaz{
+  	display: none;
+  }
+  #btn{
+  	display: none;
+  }
+  #bb{display: none;}
+  
+}
+.kotakaz{
+    width: 350px;
+	background:white;
+	/*meletakkan form ke tengah*/
+	margin: 80px auto;
+	padding: 40px 30px;
+	border-radius: 10px;
+}
+.form_az{
+	/*membuat lebar form penuh*/
+	box-sizing : border-box;
+	width: 50%;
+	padding: 6px;
+	font-size: 11pt;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+.tulisan_login{
+	text-align: center;
+	/*membuat semua huruf menjadi kapital*/
+	text-transform: uppercase;
+	font-size: 20px;
+}
+.tombol_login{
+	background: #036;
+	color: white;
+	font-size: 11pt;
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin-top: 10px;
+}
+.tombol_reset{
+	background: #036;
+	color: white;
+	font-size: 11pt;
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin-top: 10px;
+}
+#btn{
+	border-radius: 6px;
+	width: 50%;
+}
+.torologo{
+	width: 312px;
+	height: 84px;
+}
+.Orderstyle{
+	margin: 0px;
+	padding: 0px;
+}
+#WaktuIndos{
+	margin-top: 0px;
+	padding: 0px;
+}
+#headstyle{
+	margin: 0px;
+	padding: 0px;
+	width: 50%;
+	float: left;
+}
+#ord2{
+	padding: 0px;
+}
+#csstyle{
+	width: 50%;
+	text-align: right;
+	align-items: right;
+	overflow: auto;
+	font-size: 11px;
+}
+#torocs{
+	align-items: right;
+	text-align: right;
+}
+#data{
+	/*background-color: grey;*/
+	
+	margin-top:50px;
+	
+}
+#labelshipto{
+	/*background-color: red;*/
+}
+#tulis{
+	margin: 0px;
+	padding: 0px;
+   
+}
+.Orderstyles{
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+
+}
+.divstatus{
+	width: 50%
+}
+.divkurir{
+	width: 50%
+}
+#tabellist{
+	margin: auto;
+	margin-bottom: 30px;
+}
+table {
+   table-layout: fixed;
+   width: 100%;
+   border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #000;
+    padding: 5px;
+    vertical-align: top;
+}
+
+#table-wrap {position: relative;}
+p {margin: 1em 0;}
+
+.content {
+    background-color: #f00;
+}
+.content.collapse {
+    display: none;
+    background-color: #0f0;
+}

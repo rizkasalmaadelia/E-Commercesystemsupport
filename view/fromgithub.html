@@ -1,0 +1,45 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" type="text/css">
+</head>
+<body>
+    <div id="container">
+							<h3 data-localize="news_updates">Populate Data</h3>
+              <!-- <p>The data comes from https://jsonplaceholder.typicode.com/posts</p> -->
+                <table class="data table table-condensed table-striped">
+                  <tr>
+                    <td>Nama Kurir</td>
+                    <td>Id Kurir</td>
+                    <td>Order ID</td>
+                  </tr>
+              </table>
+	  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+      var end_point;
+        end_point =
+                  type: "POST",
+                  datatype:"json",
+                  url: "https://tororo-api.appspot.com/getallorder", 
+                  data:({ //data dari api
+                  from : "2019-01-25",
+                  to :  "2019-01-25",
+                  token: "15262dcfc01ea003f9508395bfb1e567"});
+
+        function populate_data(end_point) {
+           $.getJSON(end_point, function(data) {
+               html = '';
+               header='';
+                   for (i=0; i<data.length; i++) {
+                     html='<tr><td>'+data[i].nama_kurir+'</td><td>'+data[i].id_kurir+'</td><td>'+data[i].order_id+'</td></tr>';
+                     $('#container .data').append(html);
+                   }
+           });
+       }
+      populate_data(end_point);
+    });
+   </script>
+
+</body>
+<html>

@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="main")
+    title SIGNUP
+    body
+    form(action="http://localhost:1331/signup" method="post")
+      div.container
+        div.signup-box
+          div.title
+            p CREATE ACCOUNT
+          div.row
+            div.col
+              div.textboxtop
+                input(type="text" placeholder="Email" name="email")
+            div.col
+              div.textboxtop
+                input(type="password" placeholder="Password" name="password")
+          div.textbox
+            input(type="text" placeholder="Username" name="username")
+          div.textbox
+            input(type="text" placeholder="Nama Usaha" name="nama_usaha")
+          div.textbox
+            input(type="text" placeholder="Alamat Usaha" name="alamat_usaha")
+          div.textbox
+            input(type="text" placeholder="Kota" name="kota")
+          div.textbox
+            input(type="text" placeholder="Provinsi" name="provinsi")
+          div.textbox
+            input(type="text" placeholder="Kode Pos" name="kode_pos")
+          div.textbox
+            input(type="text" placeholder="No. Telp Usaha" name="no_telp")
+          div.button
+            input(type="submit" value="SIGNUP")

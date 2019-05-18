@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CEK LIST</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="navcss">
+        <link rel="stylesheet" type="text/css" href="/stylehello">
+        <link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+    </head>
+    <body>
+        <nav>
+            <a href="#" class="nav-toggle-btn"></a>
+            <ul>
+                <li><a href="navigation" id="home" title="Home" >Home</a></li>
+                <li><a href="orderid" id="ADDNEW" title = "Tambah Data Baru">New</a></li>
+                <li><a href="#" id="list" title = "Lihat Data Input">Data Input</a></li>
+                <li><a href="signup" id="btnsignup" title ="Tambah akun">Add User</a></li>
+                <li><a href="gudang" id="gudang" title = "Lihat Data Gudang">Data Gudang</a></li>
+                <li><a href="kurir" id="kurir" title = "Lihat Data Kurir">Data Kurir</a></li>
+                <li><a href="#nomor">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="kotakaz">
+            <h4 class="tulisan_login">FORM CEK INPUTAN DATA</h4>
+        <p>Tanggal awal  :   <input type="text" id="datepicker" class="form_az"></p>
+        <p>Tanggal akhir :   <input type="text" id="datepicker2" class="form_az"></p>
+        <p>Pilih kurir    :<select name="list1" id="dropdown" class="kurar">
+                </select></p>
+        <button type="button" id="btnsubmit" class="tombol_login" data-theme="g" name="submit" >SUBMIT</button>
+            <a href="http://localhost:3000/list"><input type="button" class="tombol_reset" value="REFRESH"></a>
+            <button type="button" id="btnprint" class="tombol_login" data-theme="g">PRINT</button>
+            <img src="loading" id="loading-indicator" style="display:none" />
+        </div>
+        
+        <div id="container">
+                            
+              <!-- <p>The data comes from https://jsonplaceholder.typicode.com/posts</p> -->
+                <table class="data table table-condensed table-striped" id="tabellist">
+                  <h3 id="labeltabels">Data Order <p id="hai"></p></h3>
+                    <td>No.</td>
+                    <td>Nama Kurir</td>
+                    <td>Id Kurir</td>
+                    <td>Order ID</td>
+                    <td>Waktu Indo</td>
+                    <td>Latitude</td>
+                    <td>Longitude</td>
+                    <td id="bb">Status</td>
+                  </tr>
+              </table>
+      </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+$(document).ready(function() {
+    
+    $("bb").click(function() {
+        var content =this.dataset.href;
+        $(content).toggleClass("collapse");
+    });
+    
+});
+        $.ajax({
+    type: "POST",
+    dataType: "json",
+    url: "https://url",
+    data: {token: '15262dcfc01ea003f9508395bfb1e567'},
+    success: function(response)
+    {
+    var len = response.length;
+    $("#dropdown").empty();
+       for( var i = 0; i<len; i++){
+        var nama = response[i]['nama'];
+        var id = response[i]['id'];
+            $("#dropdown").append("<option value='"+id+"'>"+nama+"   -(id)"+id+"</option>").val('');
+              //$("#dropdown").prepend("<option value=''></option>").val('');
+              //$("#dropdown").append("<option value='"+nama+"'>"+nama+"    "+id+"</option>");
+             //document.getElementById("nama2").innerHTML = nama;
+             
+        }
+      }
+    });
+  
+        (function() {
+            var bodyEl = $('body'),
+                navToggleBtn = bodyEl.find('.nav-toggle-btn');
+            
+            navToggleBtn.on('click', function(e) {
+                bodyEl.toggleClass('active-nav');
+                e.preventDefault();
+            });
+        })();
+        $(function() {
+            $("#home").tooltip();
+            $("#list").tooltip();
+            $("#ADDNEW").tooltip();
+            $("#kurir").tooltip();
+            $("#gudang").tooltip();
+            $("#btnsignup").tooltip();
+             });
+              $(function(){
+        $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#from").datepicker({ dateFormat: 'yy-mm-dd' }).bind("change",function(){
+            var minValue = $(this).val();
+            minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
+            minValue.setDate(minValue.getDate()+1);
+            $("#datepicker").datepicker( "option", "minDate", minValue );
+        })
+    });
+              $(function(){
+        $("#datepicker2").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#from2").datepicker({ dateFormat: 'yy-mm-dd' }).bind("change",function(){
+            var minValue = $(this).val();
+            minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
+            minValue.setDate(minValue.getDate()+1);
+            $("#datepicker2").datepicker( "option", "minDate", minValue );
+        })
+    });
+
+$(document).ajaxSend(function(event, request, settings) {
+  $('#loading-indicator').show();
+});
+
+$(document).ajaxComplete(function(event, request, settings) {
+  $('#loading-indicator').hide();
+});
+$(document).ready(function(){
+    $('#tabellist').hide();
+    $('#labeltabels').hide();
+  $("#btnsubmit").click(function(){//function jika diklik button search
+    $.ajax({
+        type: "POST",
+        datatype:"json",
+        url: "https://url", 
+        data:({ //data dari api
+            from : $('#datepicker').val(),
+            to : $('#datepicker2').val(),
+            id_kurir:$('#dropdown').val(),
+            token: "15262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+        {
+            if(result != null) // you should do your checking here
+            {
+               var myObj = JSON.parse(result);
+       
+                if(myObj[0].latitude != null){
+          
+                html = '';
+                header='';
+                for (i=0; i<myObj.length; i++) {
+                    html='<tr><td>'+i+'</td><td>'+myObj[i].nama_kurir+'</td><td>'+myObj[i].id_kurir+'</td><td id="ord">'+myObj[i].order_id+'</td><td>'+myObj[i].waktuindo+'</td><td>'+myObj[i].latitude+'</td><td>'+myObj[i].longitude+'</td><td><a href="infokurir/?order_id='+myObj[i].order_id+'"> <input type="button" id="btn" value="Status"'+i+'"value="PRINT"></a></td></tr>'
+                      
+                      //<tr class="content collapse"'+i+' id="content3"><td colspan="8"><div>Content 3</div></td></tr>
+
+                     $('#container .data').append(html);
+                     $('#tabellist').show();
+                     $('#labeltabels').show();
+                     // var id =$('#dropdown').children("option:selected").val();
+                     // $('#hai').innerHTML = id;
+                   }
+                }else{
+                    alert("salah");
+                    // $('#datepicker').val("").datepicker("update");
+                    // $('#datepicker2').val("").datepicker("update2");
+                }
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+            }
+        }
+    });
+    //return false;
+});
+});
+
+$(document).ready(function(){
+    $("#btnprint").click(function(){
+        // alert(id);
+        window.print();
+
+    });
+});
+    </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="second")
+    title SIGNUP
+    body
+    form(action="http://localhost:1331/loginsuccsess" method="post")
+      div.container
+        div.loginbox
+          img(src="https://png.pngtree.com/svg/20161217/avatar__181424.png").avatar
+          h1 LOGIN HERE
+            div.textbox
+              input(type="text" placeholder="Enter Username" name="username")
+            div.textbox
+              input(type="password" placeholder="Enter Password" name="password")
+            div
+              input(type="submit" value="LOG IN")
+            br
+            a(href="http://localhost:1331/forgot") Forgot Password?
+            br
+            a(href="http://localhost:1331/") Dont have an Account?

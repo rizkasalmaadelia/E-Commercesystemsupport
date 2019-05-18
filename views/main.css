@@ -1,0 +1,99 @@
+body {
+    font-family: 'Helvetica'
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(150deg, #33ff99, #339999);;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    z-index: 1;    
+}
+
+.signup-box {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+.title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #4444444
+    margin: 20px 0 70px 0;
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col {
+    float: left;
+    width: 50%;
+}
+
+.textboxtop {
+    width: 90%;
+    border-bottom: 1px solid #666666
+}
+
+.textboxtop input{
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 8px 0;
+    color: #333333;
+    font-weight: bold;
+}
+
+.textbox {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #666666;
+    margin: 16px 0;
+}
+
+.button input{
+    width: 90%;
+    border-radius: 50px;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 40px 0;
+    color: white;
+    background-image: linear-gradient(150deg, #33ff99, #339999);
+}
+
+.textbox input{
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 8px 0;
+    color: #3333333;
+    font-weight: 600;
+}
+
+.button input:hover {
+    background-image: linear-gradient(-150deg, #339999, #33ff99);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+}

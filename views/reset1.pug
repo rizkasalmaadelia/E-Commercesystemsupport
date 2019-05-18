@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="third")
+    title SIGNUP
+    body
+    form(action="http://localhost:1331/updatepass" method="post")
+      div
+        img.avatar(src="https://tapcredit.id/wp-content/uploads/2018/04/TapCredit_Logo_NoIcon.png")
+      div.container
+        div.loginbox
+          p.p1 Atur kata sandi baru
+          p.p2 Pilih kata sandi yang tidak Anda gunakan di akun lain.
+          p.p2 Demi keamanan, Anda perlu memasukkan kata sandi baru di semua perangkat.
+          div.textbox
+            input(type="email" name="email" placeholder="Email Anda")
+          div.textbox
+            input(type="password" name="password" placeholder="Kata Sandi Baru")
+          div.button(align="center")
+            input(type="submit" value="Lanjutkan")

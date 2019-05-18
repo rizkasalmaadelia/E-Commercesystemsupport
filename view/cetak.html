@@ -1,0 +1,109 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PRINT PAGE</title>
+	<link rel="stylesheet" type="text/css" href="/stylehello">
+	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+	let searchParams = new URLSearchParams(window.location.search)
+	var peeps = searchParams.has('order_id')
+	let param = searchParams.get('order_id');
+	$("#ord2").html($("#ord2").html()+param);
+
+	$(document).ready(function(){//function jika diklik button search
+    $.ajax({
+        type: "POST",
+        datatype:"json",
+        url: "https://tororo-api.appspot.com/printorder", 
+        data:({ //data dari api
+            order_id : param,
+            token: "15262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+        { 
+        	
+            if(result != null) // you should do your checking here
+            { 
+            	
+               var myObj = JSON.parse(result);
+                if(myObj[0].customer_email != null){
+                	   //script agar memanggil isi array satu persatu
+                	    document.getElementById("ord2").innerHTML = myObj[0].NomerOrder;
+                		document.getElementById("customer_email").innerHTML = myObj[0].customer_email;
+                		document.getElementById("customer_firstname").innerHTML = myObj[0].customer_firstname;
+                		document.getElementById("customer_lastname").innerHTML = myObj[0].customer_lastname;
+                		document.getElementById("telephone").innerHTML = myObj[0].telephone;
+                		document.getElementById("street").innerHTML = myObj[0].street;
+                        document.getElementById("city").innerHTML = myObj[0].city;
+                        document.getElementById("postcode").innerHTML = myObj[0].postcode;
+                        document.getElementById("status").innerHTML = myObj[0].status;
+                        document.getElementById("id_kurir").innerHTML = myObj[0].id_kurir;
+                        document.getElementById("nama_kurir").innerHTML = myObj[0].nama_kurir;
+                        document.getElementById("WaktuIndo").innerHTML = myObj[0].WaktuIndo;
+                        document.getElementById("latitude").innerHTML = myObj[0].latitude;
+                        document.getElementById("longitude").innerHTML = myObj[0].longitude;
+                        window.print();
+                }else{
+                    alert("salah");
+                    
+                }
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+            }
+        }
+    });
+    //return false;
+});	
+
+ 
+</script>
+</head>
+<body>
+	<img src="https://www.tororo.com/pub/media/logo/stores/1/logonew.png" class="torologo">
+	<div id="square">
+		<div id="headstyle">
+			<STRONG><p class="Orderstyle">Order #<label id="ord2"></label></p>
+			<p class="Orderstyle" id="WaktuIndos">Order datetime : <label id="WaktuIndo"></label></p></STRONG>
+		</div>
+		
+		<div id="csstyle">
+			<label><p class="Orderstyle" id="torocs">Tororo.com</p>
+			<p class="Orderstyle" id="torocs">cs@tororo.com</p></label>
+		</div>
+		<div id="data">
+			<STRONG><p id="labelshipto" class="Orderstyle">Ship To:</p></STRONG>
+			<p class="Orderstyles"><label id="customer_firstname"></label> <label id="customer_lastname"></label></p>
+			<p class="Orderstyles""><label id="street"></label></p>
+            <p class="Orderstyles"><label id="city"></label></p>
+            <p class="Orderstyles">lat:<label id="latitude"></label></p>
+            <p class="Orderstyles">long:<label id="longitude"></label></p>
+            <label class="Orderstyles"><label id="postcode"></label></label>
+            <p></p>
+            <p class="Orderstyles">Email:<label id="customer_email"></label></p>
+            <p class="Orderstyles">Telp:<label id="telephone"></label></p>
+            <p></p>
+            <p></p>
+            <p></p><div id="divstatus">
+            <STRONG><p id="labelshipto" class="Orderstyle">Status : </p></STRONG>
+            <p class="Orderstyles"><label id="status"></label></p></div>
+            <p></p>
+            <p></p>
+            <p></p><div id="divkurir">
+            <STRONG><p id="labelshipto" class="Orderstyle">Kurir : </p></STRONG>
+            <label class="Orderstyles"><label id="nama_kurir"></label></label>
+            <label class="Orderstyles">( <label id="id_kurir"></label> )</label></div>
+            </div>
+
+		
+		</div>
+	</div> 
+
+</body>
+
+</html> -->

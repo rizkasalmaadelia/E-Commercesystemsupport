@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hhhh</title>
+
+	 <!-- <meta charset="utf-8"/> -->
+   <!--  mematikan fungsi --><!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <link rel="stylesheet" type="text/css" href="style">
+     <link rel="stylesheet" type="text/css" href="navcss">
+<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+    <script type="text/javascript" src="jquery"></script>
+    <script type="text/javascript" src="jquery-md5"></script>
+    <!-- mematiakn fungsi --><!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<script type="text/javascript">
+    //menembak api
+	$(document).ready(function(){
+  $("#daftar").click(function(){
+    var md5 = $.md5($('#password').val());
+    alert(md5);
+    alert($('#nama').val());
+    alert($('#email').val());
+    alert($('#bagian').val());
+    $.ajax({
+        type: "POST",
+        datatype:"json",
+        url: "https://tororo-api.appspot.com/signup",
+        data:({
+            nama : $('#nama').val(),
+            email : $('#email').val(),
+            bagian : $('#bagian').val(),
+            password:md5,
+            token: "262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+		{ 
+            if(result != null) // you should do your checking here
+            {
+               var myObj = JSON.parse(result);
+                if(myObj[0].bagian != null){
+                    
+                       alert("gudangdgwah");
+                }
+                else{
+                    alert("Gagal Login. Pastikan Anda Telah Membuat Akun. Dan Pastikan Username dan Password yang dimasukan telah benar");
+                }
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+                    alert("error mbak");
+            } //return false;
+        alert("hoya");
+        }
+    
+    
+});
+} ) ;
+} ) ;
+</script>
+</head>
+<body>
+	<form>
+	<input type="text" name="nama" id="nama" placeholder="nama">
+	<input type="text" name="email" id="email" placeholder="email">
+	<input type="text" name="password" id="password" placeholder="password">
+	<input type="text" name="bagian" id="bagian" placeholder="bagian">
+	<button type="submit" value="submit" id="daftar">DAFTAR</button>
+	</form>
+</body>
+</html>

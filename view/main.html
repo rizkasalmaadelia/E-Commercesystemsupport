@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List Page</title>
+	<link rel="stylesheet" type="text/css" href="stylemain.css">
+	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      
+   
+</head>
+<body>
+
+		<div class="kotak_utama">
+			<button class="tombol_addnew" id="ADDNEW" title = "Tambah Data Baru" onclick="validate();">new</button>
+			<input type="button" value="kurir" id="kurir" class="tombol_addnew" title = "Lihat Data Kurir" onclick="loadkurir();" />
+			<input type="button" value="gudang" id="gudang" class="tombol_addnew" title = "Lihat Data Gudang" onclick="loadgudang();" />
+      <button type="button" class="tombol_addnew" id="btnsignup" name="submit" title ="Tambah akun"onclick="validat();" >add user</button>
+			<input type="button" value="log out" class="tombol_back" id="btnlogout" title = "Keluar" onclick="loadback();" />
+		
+				
+
+       </div>
+       <script language = "JavaScript">
+        function validate() {
+            window.open("orderid.html","_self");
+            
+        } 
+        function loadkurir(){
+ 		window.open("kurir.html","_self");
+ 	}
+ 	
+        function loadgudang(){
+ 		window.open("gudang.html","_self");
+ 	}
+ 	function loadback(){
+ 		window.open("index.html","_self");
+ 	}
+ 	$(function() {
+            $("#ADDNEW").tooltip();
+            $("#kurir").tooltip();
+            $("#gudang").tooltip();
+            $("#btnsignup").tooltip();
+            $("#btnlogout").tooltip();
+         });
+  function validat() {
+    window.open("signup.html","_self"); }
+</script>
+
+
+</body>
+</html>

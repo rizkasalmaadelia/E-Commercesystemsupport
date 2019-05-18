@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>orderid</title>
+	<link rel="stylesheet" type="text/css" href="stylehello">
+    <link rel="stylesheet" type="text/css" href="navcss">
+	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/easter-color/512/chick_chicken_little_cute_bird-512.png" type="image/x-icon" />
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="jquery"></script>
+    <script type="text/javascript" src="jquery-md5"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Ex2JkKa2TzYryAg6wOuQ8xKhFoOVKlk"></script>
+</head>
+	<body>
+        <nav>
+            <a href="#" class="nav-toggle-btn"></a>
+            <ul>
+                <li><a href="navigation" id="home" title="Home" >Home</a></li>
+                <li><a href="#" id="ADDNEW" title = "Tambah Data Baru">New</a></li>
+                <li><a href="list" id="input" title = "Lihat Data Input">Data Input</a></li>
+                <li><a href="signup" id="btnsignup" title ="Tambah akun">Add User</a></li>
+                <li><a href="gudang" id="gudang" title = "Lihat Data Gudang">Data Gudang</a></li>
+                <li><a href="kurir" id="kurir" title = "Lihat Data Kurir">Data Kurir</a></li>
+                <li><a href="#nomor">Contact</a></li>
+            </ul>
+        </nav>
+		<input type="text" class="orderid" id="order_id" placeholder="Masukan Order ID disini" >
+		<input type="submit" id="btnsearch" value="search" class="tombolsearch" />
+		<div class="kotakhasil"> 
+		<!-- kotak untuk output dari order id yang dimasukan -->
+			<ol class="hasil">
+				<li class="baris">Order ID : <label id="NomerOrder"></label></li>
+				<li class="baris">Email : <label id="customer_email"></label></li>
+				<li class="baris">Nama : <label id="customer_firstname"></label><label id="customer_lastname"></label></li>
+				<li class="baris">Telephone : <label id="telephone"></label></li>
+                <div class="u" id="u">
+                    <li class="barisal" id="barisal">Alamat : <label id="street"></label></li>
+                    <button class="loc" id="loc" onclick="panggilmaps();">Location</button>
+                    <div class="tempat"></div>
+                </div>
+                <div class="u2" id="u2">
+                <li class="baris">Kota : <label id="city"></label></li>
+                </div>
+                <li class="baris">Kode Pos : <label id="postcode"></label></li>
+                <li class="baris">Status : <label id="status"></label></li>
+			</ol>
+        <div class="panggilmaps" id="panggilmaps">
+                <div class="container">
+            <h4 id="labelSL">Search Location</h4>
+    <!-- search input box -->
+<form>
+<div class="form-group input-group">
+    <input type="text" id="search_location" class="orderid2" placeholder="Search location">
+    <div class="input-group-btn">
+        <button class="tombolsearch2" type="submit">
+            Locate
+        </button>
+    </div>
+</div>
+</form>
+<!-- display google map -->
+<div id="geomap"></div>
+<!-- display selected location information -->
+<h4>Location Details</h4>
+<p>Address: <input type="text" class="search_addr" id="search_addr"  size="100"></p>
+<!-- <p id="ambiladd"></p> -->
+<p>Latitude: <input type="text" class="search_latitude" id="search_latitude" size="30"></p>
+<!-- <p id="ambillat"></p> -->
+<p>Longitude: <input type="text" class="search_longitude" id="search_longitude" size="30"></p>
+<!-- <p id="ambillong"></p> -->
+<div id="pilihkurir"> <!-- combobox kurir -->
+                <h4 id="labeldropdown">Pilih Kurir</h4>
+                <!-- <select name="pilihkurir" id="pilihkurir" class="pilihkurir">
+                </select> -->
+                <select name="list1" id="dropdown" class="kurar">
+                </select>
+                <input type="hidden" id="NomerOrder2" /><!-- jg dihapus -->
+                <!-- <input type="text" id="namakurir"> -->
+                <p id="ambilkuririd"></p>
+                <!-- <p id="ambillat"></p> -->
+            <!-- button save -->
+            <div id="tempatbuttonsave">
+        <input type="submit" id="btnsave" value="save" class="tombolsearch" />
+       <!--  <button id="printPageButton" class="tombolsearch" onClick="window.print();">print</button> -->
+        </div>
+</div>
+ </div>
+<script type="text/javascript">
+    
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    url: "https://url",
+    data: {token: '15262dcfc01ea003f9508395bfb1e567'},
+    success: function(response)
+    {
+    var len = response.length;
+    $("#dropdown").empty();
+       for( var i = 0; i<len; i++){
+        var nama = response[i]['nama'];
+        var id = response[i]['id'];
+            $("#dropdown").append("<option value='"+id+"'>"+nama+"   -(id)"+id+"</option>").val('');
+              //$("#dropdown").prepend("<option value=''></option>").val('');
+              //$("#dropdown").append("<option value='"+nama+"'>"+nama+"    "+id+"</option>");
+             //document.getElementById("nama2").innerHTML = nama;
+        }
+      }
+    });
+  
+	$(document).ready(function(){
+  $("#btnsearch").click(function(){//function jika diklik button search
+    $.ajax({
+        type: "POST",
+        datatype:"json",
+        url: "https://url", 
+        data:({ //data dari api
+            order_id : $('#order_id').val(),
+            token: "15262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+        {
+            if(result != null) // you should do your checking here
+            {
+               var myObj = JSON.parse(result);
+                if(myObj[0].customer_email != null){
+                	   //script agar memanggil isi array satu persatu
+                		document.getElementById("NomerOrder").innerHTML = myObj[0].NomerOrder;
+                        document.getElementById("NomerOrder2").value = myObj[0].NomerOrder;
+                		document.getElementById("customer_email").innerHTML = myObj[0].customer_email;
+                		document.getElementById("customer_firstname").innerHTML = myObj[0].customer_firstname;
+                		document.getElementById("customer_lastname").innerHTML = myObj[0].customer_lastname;
+                		document.getElementById("telephone").innerHTML = myObj[0].telephone;
+                		document.getElementById("street").innerHTML = myObj[0].street;
+                        document.getElementById("city").innerHTML = myObj[0].city;
+                        document.getElementById("postcode").innerHTML = myObj[0].postcode;
+                        document.getElementById("status").innerHTML = myObj[0].status;
+                        $('#loc').show();     
+                }else{
+                    alert("salah");
+                    $('#order_id').val('');
+                }
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+            }
+        }
+    });
+    //return false;
+});
+});//akhir dari function button search
+    //awal function button save
+    $(document).ready(function(){
+  $("#btnsave").click(function(){//function jika diklik button search
+    //alert($('#NomerOrder2').val());
+        
+    $.ajax({
+        type:"POST",
+        datatype:"json",
+        url:"https://url", 
+        data:({ //data dari api
+            order_id:$('#NomerOrder2').val(),
+            id_kurir:$('#dropdown').val(),
+            lat:$('.search_latitude').val(),
+            long:$('.search_longitude').val(),
+            token: "15262dcfc01ea003f9508395bfb1e567"
+        }),
+        success: function(result)
+        {
+            //alert(result);
+             var ambillat = document.getElementById("search_latitude");
+             document.getElementById("ambillat").innerHTML = ambillat.value;
+             var ambillong = document.getElementById("search_longitude");
+             document.getElementById("ambillong").innerHTML = ambillong.value;
+             var ambiladd = document.getElementById("search_addr");
+             document.getElementById("ambiladd").innerHTML = ambiladd.value;
+            var ambilkurir = $('#dropdown').find(":selected").text();
+            //document.getElementById("hide-from-screen").value = $('#dropdown option:selected').val()
+            //document.getElementById("hide-from-screen").innerHTML = $('#dropdown option:selected').val()
+            //alert(ambilkurir);
+            document.getElementById("ambilkuririd").innerHTML = "ID Kurir yang Bertugas = "+ambilkurir;
+
+            if(result != null) // you should do your checking here
+            { //alert(result);
+                //[{"status":"no order sudah diambil kurir lain!"}]
+               var myObj = JSON.parse(result);
+               if(myObj[0].status =="no order sudah diambil kurir lain!"){
+                alert("no order sudah diambil kurir lain!");
+                 location.reload();
+               }else{
+                 alert("Data Berhasil Disimpan!");
+               }
+                
+            }
+            else
+            {
+                $('#result').empty().addClass('error')
+                    .append('Something is wrong.');
+            }
+        }
+    });
+    //return false;
+});
+});//akhir dari function button save
+    var geocoder;
+var map;
+var marker;
+/*
+ * Google Map with marker
+ */
+function initialize() {
+    var initialLat = $('.search_latitude').val();
+    var initialLong = $('.search_longitude').val();
+    initialLat = initialLat?initialLat:-6.180495;
+    initialLong = initialLong?initialLong:106.82834149999996;
+    var latlng = new google.maps.LatLng(initialLat, initialLong);
+    var options = {
+        zoom: 16,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("geomap"), options);
+
+    geocoder = new google.maps.Geocoder();
+
+    marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        position: latlng
+    });
+    google.maps.event.addListener(marker, "dragend", function () {
+        var point = marker.getPosition();
+        map.panTo(point);
+        geocoder.geocode({'latLng': marker.getPosition()}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                marker.setPosition(results[0].geometry.location);
+                $('.search_addr').val(results[0].formatted_address);
+                $('.search_latitude').val(marker.getPosition().lat());
+                $('.search_longitude').val(marker.getPosition().lng());
+            }
+        });
+    });
+    function tosubmit() {
+            // Getting the value of your text input
+            var mytext = document.getElementById("mytext").value;
+            // Storing the value above into localStorage
+            localStorage.setItem("mytext", mytext);
+            return true;
+        }
+}
+$(document).ready(function () {
+    //load google map
+    initialize();
+    //script agar beberapa id di hide terlebih dahulu sebelum dipanggil
+    $('#panggilmaps').hide();
+    $('#loc').hide();
+    $('#btnsave').hide();
+    /*
+     * autocomplete location search
+     */
+    var PostCodeid = '#search_location';
+    $(function () {
+        $(PostCodeid).autocomplete({
+            source: function (request, response) {
+                geocoder.geocode({
+                    'address': request.term
+                }, function (results, status) {
+                    response($.map(results, function (item) {
+                        return {
+                            label: item.formatted_address,
+                            value: item.formatted_address,
+                            lat: item.geometry.location.lat(),
+                            lon: item.geometry.location.lng()
+                        };
+                    }));
+                });
+            },
+            select: function (event, ui) {
+                $('.search_addr').val(ui.item.value);
+                $('.search_latitude').val(ui.item.lat);
+                $('.search_longitude').val(ui.item.lon);
+                var latlng = new google.maps.LatLng(ui.item.lat, ui.item.lon);
+                marker.setPosition(latlng);
+                initialize();
+            }
+        });
+    });
+    /*
+     * Point location on google map
+     */
+    $('.tombolsearch2').click(function (e) {
+        var address = $(PostCodeid).val();
+        geocoder.geocode({'address': address}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                marker.setPosition(results[0].geometry.location);
+                $('.search_addr').val(results[0].formatted_address);
+                $('.search_latitude').val(marker.getPosition().lat());
+                $('.search_longitude').val(marker.getPosition().lng());
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+        e.preventDefault();
+    });
+    //Add listener to marker for reverse geocoding
+    google.maps.event.addListener(marker, 'drag', function () {
+        geocoder.geocode({'latLng': marker.getPosition()}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    $('.search_addr').val(results[0].formatted_address);
+                    $('.search_latitude').val(marker.getPosition().lat());
+                    $('.search_longitude').val(marker.getPosition().lng());
+                }
+            }
+        });
+    });
+});
+//script id yang akan muncul ketika function panggilmaps dipanggil
+     function panggilmaps() {
+ $('#panggilmaps').show();
+ $('#pilihkurir').show();
+ $('#btnsave').show();
+ $('#datepickerplace').show();
+}
+//script agar inputan yang diberikan langsung bisa menriger button dengan enter
+$("#order_id").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#btnsearch").click();
+    }
+});
+(function() {//toggle navigation
+            var bodyEl = $('body'),
+                navToggleBtn = bodyEl.find('.nav-toggle-btn');
+            navToggleBtn.on('click', function(e) {
+                bodyEl.toggleClass('active-nav');
+                e.preventDefault();
+            });
+        })();//function tooltip
+        $(function() {
+            $("#home").tooltip();
+            $("#input").tooltip();
+            $("#ADDNEW").tooltip();
+            $("#kurir").tooltip();
+            $("#gudang").tooltip();
+            $("#btnsignup").tooltip();
+             });
+    //      $(function(){
+    //     $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+    //     $("#from").datepicker({ dateFormat: 'yy-mm-dd' }).bind("change",function(){
+    //         var minValue = $(this).val();
+    //         minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
+    //         minValue.setDate(minValue.getDate()+1);
+    //         $("#datepicker").datepicker( "option", "minDate", minValue );
+    //     })
+    // });
+</script>
+</body>
+</html>
